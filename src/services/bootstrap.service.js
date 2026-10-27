@@ -228,6 +228,14 @@ async function ensureUsers() {
     if (!existing) {
       await User.create(u);
       logger.info(`[BOOTSTRAP] Created core user: ${u.email} (${u.role})`);
+    } else if (u.email === 'amaia@iturrieta.eus' && (existing.blacklistStatus !== 'ACTIVE' || existing.isBlacklisted)) {
+      existing.blacklistStatus = 'ACTIVE';
+      existing.isBlacklisted = false;
+      existing.blacklistReason = null;
+      existing.blacklistedAt = null;
+      existing.noShowCount = 0;
+      await existing.save();
+      logger.info('[BOOTSTRAP] Restored Amaia Agirre account to ACTIVE status');
     }
   }
 
