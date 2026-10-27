@@ -1,0 +1,54 @@
+const PAYMENT_STATUS = Object.freeze({
+  CREATED: 'CREATED',
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED',
+});
+
+const PAYMENT_STATUSES = Object.freeze(Object.values(PAYMENT_STATUS));
+
+const PAYMENT_TYPE = Object.freeze({
+  BOOKING_DEPOSIT: 'BOOKING_DEPOSIT',
+});
+
+const PAYMENT_TYPES = Object.freeze(Object.values(PAYMENT_TYPE));
+
+const PAYMENT_PROVIDER = Object.freeze({
+  DEV_SIMULATED: 'DEV_SIMULATED',
+  STRIPE: 'STRIPE',
+  RAZORPAY: 'RAZORPAY',
+});
+
+const PAYMENT_PROVIDERS = Object.freeze(Object.values(PAYMENT_PROVIDER));
+
+const DEPOSIT_TYPE = Object.freeze({
+  PER_GUEST: 'PER_GUEST',
+  FLAT: 'FLAT',
+});
+
+const DEPOSIT_TYPES = Object.freeze(Object.values(DEPOSIT_TYPE));
+
+const DEPOSIT_STATUS = Object.freeze({
+  NOT_REQUIRED: 'NOT_REQUIRED',
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  REFUNDED: 'REFUNDED',
+  FAILED: 'FAILED',
+});
+
+const DEPOSIT_STATUSES = Object.freeze(Object.values(DEPOSIT_STATUS));
+
+module.exports = {
+  PAYMENT_STATUS,
+  PAYMENT_STATUSES,
+  PAYMENT_TYPE,
+  PAYMENT_TYPES,
+  PAYMENT_PROVIDER,
+  PAYMENT_PROVIDERS,
+  DEPOSIT_TYPE,
+  DEPOSIT_TYPES,
+  DEPOSIT_STATUS,
+  DEPOSIT_STATUSES,
+};

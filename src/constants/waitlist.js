@@ -1,0 +1,43 @@
+const WAITLIST_STATUS = Object.freeze({
+  WAITING: 'WAITING',
+  NOTIFIED: 'NOTIFIED',
+  CONVERTED: 'CONVERTED',
+  CANCELLED: 'CANCELLED',
+  EXPIRED: 'EXPIRED',
+});
+
+const WAITLIST_STATUSES = Object.freeze(Object.values(WAITLIST_STATUS));
+
+const ACTIVE_WAITLIST_STATUSES = Object.freeze([
+  WAITLIST_STATUS.WAITING,
+  WAITLIST_STATUS.NOTIFIED,
+]);
+
+const ALLOWED_WAITLIST_TRANSITIONS = Object.freeze({
+  [WAITLIST_STATUS.WAITING]: Object.freeze([
+    WAITLIST_STATUS.NOTIFIED,
+    WAITLIST_STATUS.CANCELLED,
+    WAITLIST_STATUS.EXPIRED,
+  ]),
+  [WAITLIST_STATUS.NOTIFIED]: Object.freeze([
+    WAITLIST_STATUS.CONVERTED,
+    WAITLIST_STATUS.CANCELLED,
+    WAITLIST_STATUS.EXPIRED,
+  ]),
+  [WAITLIST_STATUS.CONVERTED]: Object.freeze([]),
+  [WAITLIST_STATUS.CANCELLED]: Object.freeze([]),
+  [WAITLIST_STATUS.EXPIRED]: Object.freeze([]),
+});
+
+function canTransitionWaitlist(fromStatus, toStatus) {
+  const allowed = ALLOWED_WAITLIST_TRANSITIONS[fromStatus] || [];
+  return allowed.includes(toStatus);
+}
+
+module.exports = {
+  WAITLIST_STATUS,
+  WAITLIST_STATUSES,
+  ACTIVE_WAITLIST_STATUSES,
+  ALLOWED_WAITLIST_TRANSITIONS,
+  canTransitionWaitlist,
+};

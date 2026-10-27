@@ -1,0 +1,11 @@
+const ALLOCATION_SCORE = Object.freeze({
+  BASE: 100,
+  WASTED_SEAT_PENALTY: 15,
+  LOCATION_MATCH: 20,
+  SHAPE_MATCH: 10,
+  TAG_MATCH: 10,
+});
+
+module.exports = {
+  ALLOCATION_SCORE,
+};

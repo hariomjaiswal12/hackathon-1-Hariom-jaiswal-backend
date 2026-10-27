@@ -1,0 +1,41 @@
+{
+  "name": "txotx-os-backend",
+  "version": "1.0.0",
+  "description": "TXOTX OS backend API for Sidería Iturrieta table booking and restaurant operations",
+  "main": "src/server.js",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "test": "node scripts/run-all-tests.js",
+    "audit": "node scripts/final-audit.js",
+    "seed:schedule": "node scripts/seed-schedule.js",
+    "seed:data": "node scripts/seed-data.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "js,json"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "express-validator": "^7.3.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.11.4",
+    "node-cron": "^4.6.0",
+    "socket.io": "^4.8.4",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "socket.io-client": "^4.8.4"
+  }
+}

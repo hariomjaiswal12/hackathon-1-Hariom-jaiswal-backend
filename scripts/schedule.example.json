@@ -1,0 +1,57 @@
+{
+  "note": "Example only. These hours are not applied unless you run the seed script. Edit them to match Sidería Iturrieta before seeding.",
+  "days": [
+    {
+      "dayOfWeek": "MONDAY",
+      "isOpen": false,
+      "services": []
+    },
+    {
+      "dayOfWeek": "TUESDAY",
+      "isOpen": false,
+      "services": []
+    },
+    {
+      "dayOfWeek": "WEDNESDAY",
+      "isOpen": false,
+      "services": []
+    },
+    {
+      "dayOfWeek": "THURSDAY",
+      "isOpen": false,
+      "services": []
+    },
+    {
+      "dayOfWeek": "FRIDAY",
+      "isOpen": false,
+      "services": []
+    },
+    {
+      "dayOfWeek": "SATURDAY",
+      "isOpen": true,
+      "services": [
+        {
+          "name": "LUNCH",
+          "startTime": "13:00",
+          "endTime": "16:00",
+          "lastBookingTime": "14:30",
+          "bookingDurationMinutes": 90,
+          "maxGuestsPerBooking": 8
+        },
+        {
+          "name": "DINNER",
+          "startTime": "20:00",
+          "endTime": "22:00",
+          "lastBookingTime": "20:30",
+          "bookingDurationMinutes": 90,
+          "maxGuestsPerBooking": 8
+        }
+      ]
+    },
+    {
+      "dayOfWeek": "SUNDAY",
+      "isOpen": false,
+      "services": []
+    }
+  ]
+}

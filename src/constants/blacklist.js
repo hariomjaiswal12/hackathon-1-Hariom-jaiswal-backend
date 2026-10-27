@@ -1,0 +1,14 @@
+const BLACKLIST_STATUS = Object.freeze({
+  ACTIVE: 'ACTIVE',
+  BLACKLISTED: 'BLACKLISTED',
+});
+
+const BLACKLIST_STATUSES = Object.freeze(Object.values(BLACKLIST_STATUS));
+
+const AUTOMATIC_BLACKLIST_REASON = 'Repeated no-shows';
+
+module.exports = {
+  BLACKLIST_STATUS,
+  BLACKLIST_STATUSES,
+  AUTOMATIC_BLACKLIST_REASON,
+};
