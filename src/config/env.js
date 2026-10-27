@@ -54,8 +54,13 @@ function validateEnv() {
     if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 16) {
       errors.push('JWT_SECRET must be at least 16 characters in production');
     }
-    if (!process.env.CLIENT_URL || process.env.CLIENT_URL === '*') {
-      errors.push('CLIENT_URL must be specified and cannot be wildcard "*" in production');
+    const originConfig =
+      process.env.CLIENT_URL ||
+      process.env.FRONTEND_URL ||
+      process.env.CORS_ORIGIN ||
+      process.env.ALLOWED_ORIGINS;
+    if (originConfig && originConfig.includes('*')) {
+      errors.push('CORS origin cannot be wildcard "*" in production when credentials are enabled');
     }
   }
 
@@ -98,7 +103,12 @@ const env = {
   mongodbUri: process.env.MONGODB_URI || '',
   jwtSecret: process.env.JWT_SECRET || '',
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '7d',
-  clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
+  clientUrl:
+    process.env.CLIENT_URL ||
+    process.env.FRONTEND_URL ||
+    process.env.CORS_ORIGIN ||
+    process.env.ALLOWED_ORIGINS ||
+    'https://hackathon-1-hariom-jaiswal-frontend.vercel.app,http://localhost:5173',
   jobs: readJobConfig(),
   noShowBlacklistThreshold: readNoShowBlacklistThreshold(),
   integrationWebhookSecret: process.env.INTEGRATION_WEBHOOK_SECRET || '',
