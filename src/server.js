@@ -5,6 +5,7 @@ const { connectDB, disconnectDB } = require('./config/db');
 const { initializeRealtime, closeRealtime } = require('./services/realtime.service');
 const { startScheduler, stopScheduler } = require('./jobs');
 const { integrationView } = require('./services/integrations/providerConfig');
+const { ensureEssentialData } = require('./services/bootstrap.service');
 const logger = require('./utils/logger');
 const APP = require('./constants/app');
 
@@ -24,6 +25,7 @@ async function start() {
 
   try {
     await connectDB();
+    await ensureEssentialData();
   } catch (error) {
     logger.error(`Startup aborted: ${error.message}`);
     try {
