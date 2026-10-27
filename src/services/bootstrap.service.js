@@ -142,6 +142,7 @@ const DEMO_EVENTS = [
     startTime: '20:00',
     endTime: '23:30',
     status: EVENT_STATUS.PUBLISHED,
+    isPublished: true,
     imageUrl: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&auto=format&fit=crop&q=80',
   },
   {
@@ -155,6 +156,7 @@ const DEMO_EVENTS = [
     startTime: '13:00',
     endTime: '16:30',
     status: EVENT_STATUS.PUBLISHED,
+    isPublished: true,
     imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&auto=format&fit=crop&q=80',
   },
   {
@@ -168,6 +170,7 @@ const DEMO_EVENTS = [
     startTime: '12:00',
     endTime: '19:00',
     status: EVENT_STATUS.PUBLISHED,
+    isPublished: true,
     imageUrl: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&auto=format&fit=crop&q=80',
   },
   {
@@ -181,6 +184,7 @@ const DEMO_EVENTS = [
     startTime: '20:00',
     endTime: '23:30',
     status: EVENT_STATUS.PUBLISHED,
+    isPublished: true,
     imageUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&auto=format&fit=crop&q=80',
   },
 ];
@@ -268,17 +272,27 @@ async function ensureContent(adminUser) {
   const eventsCount = await Event.countDocuments();
   if (eventsCount === 0) {
     for (const e of DEMO_EVENTS) {
-      await Event.create({ ...e, createdBy: adminUser._id });
+      await Event.create({ ...e, isPublished: true, createdBy: adminUser._id });
     }
     logger.info(`[BOOTSTRAP] Seeded ${DEMO_EVENTS.length} published events`);
+  } else {
+    await Event.updateMany(
+      { status: EVENT_STATUS.PUBLISHED, isPublished: { $ne: true } },
+      { $set: { isPublished: true } }
+    );
   }
 
   const newsCount = await News.countDocuments();
   if (newsCount === 0) {
     for (const n of DEMO_NEWS) {
-      await News.create({ ...n, createdBy: adminUser._id });
+      await News.create({ ...n, isPublished: true, createdBy: adminUser._id });
     }
     logger.info(`[BOOTSTRAP] Seeded ${DEMO_NEWS.length} published news articles`);
+  } else {
+    await News.updateMany(
+      { status: NEWS_STATUS.PUBLISHED, isPublished: { $ne: true } },
+      { $set: { isPublished: true } }
+    );
   }
 }
 
